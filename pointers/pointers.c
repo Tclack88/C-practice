@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 /*
     Given a character pointer x (that points to an array of chars), and a
@@ -15,6 +16,12 @@
 */
 void string_copy(char *x, char *y)
 {
+	while (*y != '\0'){
+		*x = *y;
+		//printf("%c %c\n", *x, *y);
+		x++;
+		y++;
+	}	
 
 }
 
@@ -28,7 +35,14 @@ void string_copy(char *x, char *y)
 */
 char *find_char(char *str, char c)
 {
-
+	//printf("%c, %c\n", *str, c);
+	int i = 0;
+	while (*str != c){
+		//printf("%c\n",*str);
+		i++;
+		str++;
+	}	
+	return str;
 }
 
 /*
@@ -41,6 +55,25 @@ char *find_char(char *str, char c)
 */
 char *find_string(char *haystack, char *needle)
 {
+	int i = 0;
+	printf("searching, %d\n", strlen(haystack));
+	while (i < strlen(haystack)){
+		char temp[1024];
+		string_copy(temp,haystack);
+		//printf("%s\n",temp);
+		printf("%c\n",find_char(temp));
+		i++;
+	}
+
+	//while (find_char(needle))
+
+	printf("the needle is %s,haystack: %s with len %d\n", needle,haystack,strlen(needle));
+	/*char searching[1024]; 
+	string_copy(searching, needle);
+	printf("I'm looking for: %s\n", output);*/
+
+	//int width = strlen(needle);
+	return "s";
 
 }
 
