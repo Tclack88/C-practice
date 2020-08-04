@@ -36,10 +36,8 @@ void string_copy(char *x, char *y)
 char *find_char(char *str, char c)
 {
 	//printf("%c, %c\n", *str, c);
-	int i = 0;
 	while (*str != c){
 		//printf("%c\n",*str);
-		i++;
 		str++;
 	}	
 	return str;
@@ -55,33 +53,35 @@ char *find_char(char *str, char c)
 */
 char *find_string(char *haystack, char *needle)
 {
-	int i = 0;
-	printf("searching, %d\n", strlen(haystack));
-	while (i < strlen(haystack)){
-		char temp[1024];
-		string_copy(temp,haystack);
-		//printf("%s\n",temp);
-		printf("%c\n",find_char(temp));
-		i++;
+	while (*needle != *haystack){
+		printf("outer: %c, %c\n", *haystack, *needle);	
+		*haystack++;
+		if (*needle == *haystack){
+			for (int j=0; j<strlen(needle); j++){
+				printf("inner: %s, %s\n", haystack, needle);	
+				printf("%d\n",j):
+				if (needle[j] != haystack[j]){
+					haystack++;
+				}
+				if (j+1 == strlen(needle)){
+					printf("%s", "yo!\n");
+					return haystack;
+				}
+			}
+		}
 	}
 
-	//while (find_char(needle))
-
-	printf("the needle is %s,haystack: %s with len %d\n", needle,haystack,strlen(needle));
-	/*char searching[1024]; 
-	string_copy(searching, needle);
-	printf("I'm looking for: %s\n", output);*/
-
-	//int width = strlen(needle);
-	return "s";
-
+	printf("match: %c, %c\n", *haystack, *needle);	
+	printf("%s - %s", needle, haystack);
+	printf("needle: \"%s\", haystack: \"%s\" (needle len %d)\n", needle, haystack, strlen(needle));
+	return "failed to end";
 }
 
 #ifndef TESTING
 int main(void)
 {
     char *found_char = find_char("hello", 'e');
-    char *found_string = find_string("world", "or");
+    char *found_string = find_string("helloworld", "or");
 
     printf("Found char: %s\n", found_char);
     printf("Found string: %s\n", found_string);
