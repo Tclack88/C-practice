@@ -53,35 +53,35 @@ char *find_char(char *str, char c)
 */
 char *find_string(char *haystack, char *needle)
 {
-	while (*needle != *haystack){
-		printf("outer: %c, %c\n", *haystack, *needle);	
-		*haystack++;
-		if (*needle == *haystack){
-			for (int j=0; j<strlen(needle); j++){
-				printf("inner: %s, %s\n", haystack, needle);	
-				printf("%d\n",j):
-				if (needle[j] != haystack[j]){
-					haystack++;
-				}
-				if (j+1 == strlen(needle)){
-					printf("%s", "yo!\n");
-					return haystack;
-				}
-			}
-		}
-	}
 
-	printf("match: %c, %c\n", *haystack, *needle);	
-	printf("%s - %s", needle, haystack);
-	printf("needle: \"%s\", haystack: \"%s\" (needle len %d)\n", needle, haystack, strlen(needle));
-	return "failed to end";
+	for (int i=0; i<strlen(haystack); i++){
+		printf("%ld\n",strlen(needle));
+		//char buffer[1024];
+		char substring[8];
+		for (int j=0; j<strlen(needle); j++){
+			substring[j] = haystack[j];
+		}
+		printf("Current substring: '%s', needle: '%s'\n", substring, needle);
+		printf("substring = needle?%d\n", strcmp(substring,needle) != 0);
+		if (strcmp(substring, needle) == 0){
+			printf("%s\n", "found!");
+			return haystack;
+		}
+		haystack++;
+		/*for (int j=0; j<strlen(needle); j++){
+			buffer[j] = substring;
+		}	
+		printf("buffer: %s, needle: %s\n",buffer, needle);
+		*/
+	}
 }
 
 #ifndef TESTING
 int main(void)
 {
     char *found_char = find_char("hello", 'e');
-    char *found_string = find_string("helloworld", "or");
+    //char *found_string = find_string("helloworld", "or");
+    char *found_string = find_string("world", "or");
 
     printf("Found char: %s\n", found_char);
     printf("Found string: %s\n", found_string);
