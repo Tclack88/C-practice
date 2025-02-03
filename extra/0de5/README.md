@@ -82,3 +82,16 @@ After editing everything, using `:%!xxd -r` to "revert" the hexdump back to bina
 ```
 
 What a cool (and super beginner level) exploit!
+
+2. string\_maker.c
+Explores expressing various input bytes into integer, binary, octal, hex, ASCII
+No exploint, just introductory C exercise
+
+3. strinspect
+The raw C for a utility that when called takes the command line argument string and expresses it. as ASCII, Hex, Dec and Bin vertically. For example:
+$ ./strinspect L33tHaxxor
+
+ASCII:         L         3         3         t         H         a         x         x         o         r
+Hex:          4C        33        33        74        48        61        78        78        6F        72
+Dec:          76        51        51       116        72        97       120       120       111       114
+Bin:    01001100  00110011  00110011  01110100  01001000  01100001  01111000  01111000  01101111  01110010
