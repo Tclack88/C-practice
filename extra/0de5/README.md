@@ -95,3 +95,17 @@ ASCII:         L         3         3         t         H         a         x    
 Hex:          4C        33        33        74        48        61        78        78        6F        72
 Dec:          76        51        51       116        72        97       120       120       111       114
 Bin:    01001100  00110011  00110011  01110100  01001000  01100001  01111000  01111000  01101111  01110010
+
+4. fizzbuzz
+A variation on  the classic FizzBuzz where all memory is saved to a string in a separate function and then printed. Purpose of the change: to practice "passing strings to and from functions" which doesn't actually happen in C (instead just the address of the string is)
+
+5. primesieve
+A way to find prime numbers up to some value N. This is done ehre first by making the list of numbers 2-N then extracting each number at the front and removing all numbers divisible by it, so eliminate 4,6,8..., eliminate (6),9,(12),15,(18)... etc. (I put 6,12,18 in parentheses because they're already divisible by 2. This could be done much more efficiently by doing a linked list so instead of shifting everthing down one after I eliminate it (which is what I do. Yuck!)
+
+Here's the runtimes for each size as 10 times more numbers are checked each round:
+
+```
+<= 1000	   real    0m0.283s
+100,000    real    0m4.410s
+1,000,000  real    6m20.654s
+```
