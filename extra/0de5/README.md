@@ -109,3 +109,6 @@ Here's the runtimes for each size as 10 times more numbers are checked each roun
 100,000    real    0m4.410s
 1,000,000  real    6m20.654s
 ```
+
+6. wordinator
+Takes numbers (up to around 2 billion) like 134708 and converts to "one hundred and thirty four thousand seven hudnred and eight"
