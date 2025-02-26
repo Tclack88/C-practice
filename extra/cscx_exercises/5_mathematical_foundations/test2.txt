@@ -1,0 +1,4 @@
+union set 1 2 3 set 2 3 4
+intersection set 1 2 3 set 2 3 4
+union set 2 3 5 7 set 8 9 10
+intersection set 2 3 5 7 set 8 9 10

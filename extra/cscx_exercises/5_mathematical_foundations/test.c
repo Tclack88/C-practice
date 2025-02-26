@@ -6,8 +6,11 @@ int main(){
 	char out[30];
 	int a = 2;
 	int b = 8;
+	int ratio = b/a;
+	char section[ratio];
 	scanf("%s",in);
-	printf("entered: %s\n",in);
-	
+	int len = strlen(in);
+	sprintf(secion, in[len-ratio -1], ratio);
+	printf("section: %s\n",section);
 	return 0;
 }
