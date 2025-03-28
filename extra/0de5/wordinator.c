@@ -1,3 +1,7 @@
+// wordinator challenge on 0de5 as explained here
+// 0de5.net/stimuli/just-enough-c-to-have-fun
+// in brief it takes numeric values and converts to spoken words
+// 2002 -> "two thousand and two", 147000000 "one hundred and forty-seven million", etc.
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -62,6 +66,8 @@ void spell_triplet(int in_num){
 	if (tmp > 0){
 		if (tmp >=20){
 			spell_tens(tmp);
+			if (tmp%10 > 0)
+				printf("-"); // eg: 47 -> forty-seven, not fortyseven
 			spell_single(tmp%10);
 		}
 		else if (tmp > 9)
@@ -74,29 +80,37 @@ void spell_triplet(int in_num){
 
 int main(){
 	int size,offset;
-	//char input[] = "2123087128";
-	//char input[] = "10 00000118";
-	char input[] = "1147483647";
+	//char input[] = "1337";
+	//char input[] = "147000001";
+	char input[] = "2123087128";
 	char tmp[10], slice[4];
 	int i = 0;
 	sscanf(&input[i], "%s", tmp);
 	size = strlen(tmp);
 	printf("%s:\t",tmp);
+	if (strcmp(input,"0")==0){ // zero edge-case
+		printf("zero\n");
+		return 0;
+	}
 	if (size > 9 && size <= 12){
 		spell_triplet(atoi(tmp)/1000000000);
-		printf(" billion ");
+		printf(" billion");
+		if (atoi(tmp)%1000000000 > 0)
+			printf(",");
+		printf(" ");
 		offset = size - 9;
 		i += offset;
 		sscanf(&input[i], "%s", tmp);
 		size = strlen(tmp);
-		/*if (atoi(tmp) > 0) // add comma if more to come
-			printf(",");
-		printf(" ");*/
 	}
 	if (size > 6 && size <= 9){
 		spell_triplet(atoi(tmp)/1000000);
-		if (atoi(tmp)/1000000 > 0)
-			printf(" million ");
+		if (atoi(tmp)/1000000 > 0){
+			printf(" million");
+			if (atoi(tmp)%1000000 > 0)
+				printf(",");
+		printf(" ");
+		}
 		offset = size - 6;
 		i += offset;
 		sscanf(&input[i], "%s", tmp);
@@ -104,15 +118,19 @@ int main(){
 	}
 	if (size > 3 && size <= 6){
 		spell_triplet(atoi(tmp)/1000);
-		if (atoi(tmp)/1000 > 0)
-			printf(" thousand ");
+		if (atoi(tmp)/1000 > 0){
+			printf(" thousand");
+			if (atoi(tmp)%1000 > 0)
+				printf(",");
+		printf(" ");
+		}
 		offset = size - 3;
 		i += offset;
 		sscanf(&input[i], "%s", tmp);
 		size = strlen(tmp);
 	}
 	if (size > 0 && size <= 3){
-		if (atoi(tmp)%100 == atoi(tmp))  
+		if (atoi(tmp)%100 == atoi(tmp) && atoi(tmp) != 0)  
 			printf("and ");
 		spell_triplet(atoi(tmp));
 		offset = size;
