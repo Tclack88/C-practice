@@ -6,35 +6,50 @@ int max(int a, int b){
 	return b;
 }
 
-int gcd(int a,int b){
+int gcf(int a,int b){
         if (b==0){
                 return a;
         }
         int r = a % b; // remainder
-        return gcd(b,r);
+        return gcf(b,r);
 }
 // Strategy:
 // lcm must be a multiple of gcf. 
 // So rather than checking every number
-// check every multiple of gcf
+// check every multiple of gcf 
+// ------------- Works but slow
 /*int lcm(int a, int b){
-	int gcf = gcd(a,b);
-	int N = max(a,b)/gcf;
-	int least = N*gcf;
+	int g = gcf(a,b);
+	int N = max(a,b)/g;
+	int least = N*g;
 	while ( least%a != 0 || least%b != 0  ){
 		N++;
-		least = N*gcf;
+		least = N*g;
 	}
 	return least;
 }*/
 
-int lcm(int a, int b){
+// Strategy 2: less complex, gcf is smaller than the larger of a and b
+// So one could check multiples of the larger value until a value
+// is found such that the smaller of a,b is divisible with mod of 0
+// ------------- Works but also is slow
+/*int lcm(int a, int b){
 	int N = max(a,b);
 	int least = N;
 	while (least%b != 0){
 		least += N;
 	}
 	return least;
+}*/
+
+// After some research, I found that apparently
+// a * b = gfc(a,b) * lcm(a,b)
+// Euclid's algorithm is fast and computes gcf leaving
+// lcm found by a product and division
+
+int lcm(int a, int b){
+	int g = gcf(a,b);
+	return (a*b)/g;
 }
 
 int main(){
@@ -51,9 +66,3 @@ int main(){
 	}
 	return 0;
 }
-
-//  3 2 4     24     3 2 5    30
-// Q  A  B  R
-// 1  30 24 6
-// 4  24 6 0
-// 	  6  0
