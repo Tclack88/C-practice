@@ -60,3 +60,28 @@ int main(){
 	}
 	return 0;
 }
+
+/*
+AI solution after I figured it out myself:
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+
+
+int roundiv(int n, int d) {
+    if (d == 0) return 0; // Avoid division by zero
+
+    int sign = (n > 0) == (d > 0) ? 1 : -1;
+    int q = n / d;
+    int r = abs(n % d);
+
+    if (r >= abs(d / 2)) {
+        return q + (sign > 0); // Use the sign to round up or down
+    } else if (r == abs(d / 2) && (q % 2 != 0)) {
+          return q + sign; // Correct halfway round to even
+    } else {
+        return q;
+    }
+}
+*/
