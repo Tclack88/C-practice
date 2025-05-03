@@ -1,0 +1,28 @@
+bool inRange(int n){
+    return ( (n>47 && n<58) || (n>96 && n<123) );
+}
+
+bool isPalindrome(char* s) {
+    char* p1 = &s[0];
+    char* p2 = &s[strlen(s)-1];
+    while (*p1 != '\0' && p1 <= p2){
+        *p1 = tolower(*p1);
+        *p2 = tolower(*p2);
+		if (!inRange(*p1)){
+            p1++;
+            continue;
+        }
+        if (!inRange(*p2)){
+            p2--;
+            continue;
+        }
+		if (*p1 != *p2){
+            return false;
+        }
+        p1++;
+        if (*p1 == '\0')
+            break;
+        p2--;
+    }
+    return true;
+}
