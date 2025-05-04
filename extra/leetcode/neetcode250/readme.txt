@@ -20,6 +20,10 @@ https://neetcode.io/practice?tab=neetcode250
 [] Graphs
 
 ## Problem Categories
+### arrays and hashing
+[x] concatenation of array
+
+[] contains duplicate
 ### two pointers
 [] Reverse String
 
