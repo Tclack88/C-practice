@@ -2,18 +2,14 @@
 // And all relevant functions
 /*
 // sample input: 
-3
-5
-1 1 6 8 8
-5
-1 2 3 4 5
-4
-5 5 5 5
-
+2
+8
+1 2 3 3 3 5 1 3
+7
+1 2 3 2 1 3 2
 expected output:
-1 6 8 
-1 2 3 4 5 
-5 
+2
+3 
 */
 #include <stdio.h>
 #include <stdlib.h> // Required for malloc and free
@@ -71,17 +67,25 @@ void freeList(struct Node* head) {
     }
 }
 
-// --- YOUR removeDuplicates FUNCTION GOES BELOW THIS LINE ---
-// You will fill this function
-struct Node* removeDuplicates(struct Node* head) {
-    // Your implementation here
-    // ...
-    // Return the head of the modified list
-    return head; // Placeholder
+// MY code below here
+int countCriticalPoints(struct Node* head) {
+    // Write your code here
+    struct Node* current = head;
+    int cp = 0;
+    int c, n, nn;
+    while(current->next != NULL && current->next->next != NULL){
+        c = current->data;
+        n = current->next->data;
+        nn = current->next->next->data;
+        if( (c<n && nn<n) || (c>n && nn>n) ){
+            cp++;
+        }
+        current=current->next;
+    }
+    return cp;
+
 }
-// --- YOUR removeDuplicates FUNCTION GOES ABOVE THIS LINE ---
-
-
+// my code above here
 int main() {
     int T;
     scanf("%d", &T); // Read number of test cases
@@ -102,18 +106,19 @@ int main() {
 
         struct Node* head = buildList(arr, N); // Build the linked list
 
-        // Call your removeDuplicates function
-        struct Node* newHead = removeDuplicates(head);
+        // Call your countCriticalPoints function
+		//printList(head);
+        int count = countCriticalPoints(head);
 
         // Print the resulting list
-        printList(newHead);
+        printf("%d\n",count);
 
         // Free the memory allocated for the list
         // Note: freeList should be called on the head returned by removeDuplicates
         // assuming removeDuplicates might change the head or rearrange nodes.
         // If your removeDuplicates only modifies next pointers and uses free()
         // on removed nodes, calling freeList(newHead) is correct.
-        freeList(newHead);
+        freeList(head);
         free(arr); // Free the temporary array
     }
 
