@@ -39,7 +39,6 @@ int* next_higher_peak(int* heights, int n) {
     struct Node* stack;
     struct Node* tail;
     struct Node* newNode;
-    struct Node* tmp;
     int top = -1;
     for(int i=0; i<n; i++){
         if (i==0){

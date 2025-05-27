@@ -36,9 +36,7 @@ void printQ(struct Node* head){
 }
 
 int main(){
-	struct Node* Q;
 	int T, size, idx, val;
-	int arr[100002]; // 10^5 max size
 	scanf("%d",&T);
 	while (T--){
 		struct Node* head;
