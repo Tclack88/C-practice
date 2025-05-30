@@ -89,6 +89,33 @@ void merge_sort(int arr[], int size){
     }
 }
 
+void quicksort(int arr[], int size){
+    int pivot = arr[size-1];
+    int tmp, i, j;
+    if (size <= 1)
+        return;
+    else{
+        i = -1;
+        j = 0;
+        while (j < size-1){
+            if (arr[j] < pivot){
+                i++;
+                tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+            }
+            j++;
+        }
+        i++;
+        tmp = arr[i];   // swap pivot to  i+1 location
+        arr[i] = pivot;
+        arr[size-1] = tmp;
+    }
+    quicksort(&arr[0],i);
+    quicksort(&arr[i+1],size-i-1);
+    return;
+}
+
 
 int main(){
 	char input[500]; // numbers range 0-1000 (incluseive), 100 max
@@ -108,7 +135,8 @@ int main(){
 		size = i;
 		//selection_sort(arr,size);
 		//insertion_sort(arr,size);
-		merge_sort(arr,size);
+		//merge_sort(arr,size);
+		quicksort(arr,size);
 		print_array(arr, size);
 	}
 	return 0;
