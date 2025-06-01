@@ -53,8 +53,7 @@ int main() {
 	for (int i=0; i<n; i++){
 	    scanf("%d", &arr[i]);
 	}
-	//quicksort(arr,n);
-	selection_sort(arr,n);
+	quicksort(arr,n);
 	printArr(arr,n);
     return 0;
 }
