@@ -1,3 +1,21 @@
+// https://www.codechef.com/learn/course/trees/TREES/problems/DSADFS?tab=statement
+/* depth first search
+two challenges exist here:	1. Building and filling a general n-node tree structure
+							2. doing the depth first search (much easier in comparison to the initial tree build
+
+INPUT:									OUTPUT
+10 <-- size (unecessary)			
+1 2 <--- node, next node pairs
+1 5		(eg. node 1 has children)
+1 9				  |					1 2 3 4 5 6 7 8 9 10
+2 3			------------
+3 4			|	 |		|
+5 6			2    5		9
+6 7
+5 8
+9 10
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -30,43 +48,33 @@ void addEdge(struct Node* current, int u, int v){
     struct Node* newNode = createNode(v);
     if (current->val == u){
         if (current->nextChild == NULL){
-            printf("at value u=%d, adding new child\n",u);
             current->nextChild = newNode;
-			printf("\t...success\n");
             return;
         }
         else{
-            printf("u (%d) already has child, making sibling...\n",u);
             struct Node* lastSibling = current->nextChild;
-            while (lastSibling->nextSibling != NULL){
+            while (lastSibling->nextSibling != NULL)
                 lastSibling = lastSibling->nextSibling;
-            }
             lastSibling->nextSibling = newNode;
             return;
         }
     }
-    else if (current->nextChild == NULL){
-        printf("creating new leaf %d\n",v);
-        current->val = u;
-        current->nextChild = newNode;
-        return;
-    }
-    else{
-        addEdge(current->nextChild, u, v);
+	// could made return type of add Edge int (0 or 1 for success/fail
+	// this could prevent needless recursive search
+    else{ 
+		if (current->nextChild != NULL)
+			addEdge(current->nextChild,u,v);
+		if (current->nextSibling != NULL)
+        	addEdge(current->nextSibling,u,v);
     }
 }
 
 int main() {
-    struct Node* tree;
+    struct Node* tree = createNode(1);
     int N,u,v;
     scanf("%d",&N);
-    for(int i=0; i<N; i++){
-        scanf("%d %d",&u, &v);
+	while( scanf("%d %d",&u, &v) == 2)
         addEdge(tree,u,v);
-    }
     dfs(tree);
-    
-
     return 0;
 }
-
