@@ -1,25 +1,20 @@
-// https://www.codechef.com/learn/course/trees/TREES/problems/DSADFS?tab=statement
-/* depth first search
-two challenges exist here:	1. Building and filling a general n-node tree structure
-							2. doing the depth first search (much easier in comparison to the initial tree build
-
-INPUT:									OUTPUT
-10 <-- size (unecessary)			
-1 2 <--- node, next node pairs
-1 5		(eg. node 1 has children)
-1 9				  |					1 2 3 4 5 6 7 8 9 10
-2 3			------------
-3 4			|	 |		|
-5 6			2    5		9
-6 7
-5 8
-9 10
+// https://www.codechef.com/learn/course/trees/TREES/problems/DSCPP86
+/*
+count leafs
+INPUT:					OUTPUT:
+8							3
+0 1
+0 2
+1 3
+1 4
+2 5
+3 6
+5 7
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAXX 100005
+int leaf_count = 0;
 
 struct Node{
     int val;
@@ -36,12 +31,15 @@ struct Node* createNode(int val){
 }
 
 
-void dfs(struct Node* node){
-    if (node == NULL)
+void dfs_count_leafs(struct Node* node, int is_counting_child){
+    if (node == NULL){
+        if (is_counting_child == 1){
+            leaf_count++;
+        }
         return;
-    printf("%d ",node->val);
-    dfs(node->nextChild);
-    dfs(node->nextSibling);
+	}
+    dfs_count_leafs(node->nextChild, 1);
+    dfs_count_leafs(node->nextSibling,0);
 }
 
 void addEdge(struct Node* current, int u, int v){
@@ -59,27 +57,26 @@ void addEdge(struct Node* current, int u, int v){
             return;
         }
     }
-	// could made return type of add Edge int (0 or 1 for success/fail
-	// this could prevent needless recursive search
-    else{ 
-		if (current->nextChild != NULL)
-			addEdge(current->nextChild,u,v);
-		if (current->nextSibling != NULL)
-        	addEdge(current->nextSibling,u,v);
+    else{
+        if (current->nextChild != NULL)
+            addEdge(current->nextChild,u,v);
+        if (current->nextSibling != NULL)
+            addEdge(current->nextSibling,u,v);
     }
 }
 
+
 int main() {
-    //struct Node* tree = createNode(1);
     int N,u,v;
     scanf("%d",&N);
 	// initialize first node with first item scanned, then
-    // add the edge scanned
+	// add the edge scanned
 	scanf("%d %d", &u, &v);
     struct Node* tree = createNode(u);
-	addEdge(tree,u,v);
-	while( scanf("%d %d",&u, &v) == 2)
+    addEdge(tree,u,v);
+    while( scanf("%d %d",&u, &v) == 2)
         addEdge(tree,u,v);
-    dfs(tree);
+    dfs_count_leafs(tree, 0);
+    printf("%d\n",leaf_count);
     return 0;
 }
