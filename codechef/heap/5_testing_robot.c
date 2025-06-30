@@ -1,5 +1,5 @@
 // https://www.codechef.com/practice/course/heaps/HEAPF/problems/TSTROBOT?tab=statement
-/* This doesn't actually seem to fit the "heap" theme. In essanve, a number is given (as a starting point), then a string of R's and L's (length is specified). Based on the ordering, a robot will move right or left. The goal is to print the range (maximum to minimum value)
+/* This doesn't actually seem to fit the "heap" theme. In essence, a number is given (as a starting point), then a string of R's and L's (length is specified). Based on the ordering, a robot will move right or left. The goal is to print the range (maximum to minimum value)
 INPUT:			OUTPUT:
 2
 6 10
